@@ -1,0 +1,3487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liranz to the World: Observations, Strategy & Outcomes</title>
+  <!-- Google Fonts: Google Sans (via Plus Jakarta Sans & Google Sans fallbacks), DM Sans, Instrument Serif, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       SWISS INTERNATIONAL DESIGN SYSTEM — EXPANDED SPATIAL ARCHITECTURE
+       Strict 16-Column Grid | IKB Blue & Liranz Navy/Orange Accent | Zero Radius
+       ========================================================================== */
+    :root {
+      --ikb: #002FA7;
+      --liranz-orange: #F58220;
+      --liranz-navy: #0D223A;
+      --ikb-light: rgba(0, 47, 167, 0.08);
+      --paper: #FAFAF8;
+      --paper-pure: #FFFFFF;
+      --paper-subtle: #F4F4EF;
+      --ink: #0A0A0A;
+      --ink-muted: #52524D;
+      --ink-subtle: #8A8A84;
+      --border-dark: #0A0A0A;
+      --border-light: #DADAD2;
+      --border-hairline: #E8E8E0;
+      --font-display: 'Google Sans', 'Plus Jakarta Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Absolute rule: Zero radius */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #0A0A0A;
+      color: var(--ink);
+      font-family: var(--font-body);
+      user-select: none;
+    }
+
+    /* Presentation Master Frame (16:9 fixed canvas with responsive scale) */
+    #viewport {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #181818 0%, #080808 100%);
+      overflow: hidden;
+    }
+
+    #stage {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      flex-shrink: 0;
+      background-color: var(--paper);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.12);
+      transform-origin: center center;
+      overflow: hidden;
+    }
+
+    /* Slide Deck Container */
+    .slides-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Generous Swiss Padding & Breathing Room */
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      padding: 50px 75px 40px 75px;
+      background-color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(6px);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      z-index: 2;
+    }
+
+    /* 16-Column Grid Layout Utility */
+    .grid-16 {
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+      gap: 20px;
+      width: 100%;
+    }
+
+    /* Swiss Typography Hierarchy - 2X SCALED FOR MAXIMUM PRESENTATION LEGIBILITY */
+    .mono-meta {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mono-meta .badge {
+      background-color: var(--ink);
+      color: var(--paper);
+      padding: 5px 11px;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .mono-meta .badge-ikb {
+      background-color: var(--ikb);
+      color: var(--paper);
+      padding: 5px 11px;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .mono-meta .badge-orange {
+      background-color: var(--liranz-orange);
+      color: var(--paper);
+      padding: 5px 11px;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .brand-header-logo {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+
+    .slide-headline {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .slide-subhead {
+      font-family: var(--font-body);
+      font-size: 24px;
+      line-height: 1.35;
+      color: var(--ink-muted);
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    .slide-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+
+    .slide-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 12px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* Spacious 2-Column & 3-Column Layouts */
+    .strategy-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .strategy-triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .strategy-visual-split {
+      display: grid;
+      grid-template-columns: 1.15fr 1.35fr;
+      gap: 24px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    /* Subtle Swiss Animations & Staggered Cascade */
+    @keyframes slideHeaderIn {
+      0% { opacity: 0; transform: translateY(-6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cardFadeUp {
+      0% { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide.active .slide-header {
+      animation: slideHeaderIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide.active .strategy-card:nth-child(1) {
+      animation: cardFadeUp 0.4s 0.04s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .strategy-card:nth-child(2) {
+      animation: cardFadeUp 0.4s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .strategy-card:nth-child(3) {
+      animation: cardFadeUp 0.4s 0.16s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .swiss-table-container {
+      animation: cardFadeUp 0.4s 0.06s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .cover-pillar:nth-child(1) {
+      animation: cardFadeUp 0.45s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .cover-pillar:nth-child(2) {
+      animation: cardFadeUp 0.45s 0.16s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide.active .cover-pillar:nth-child(3) {
+      animation: cardFadeUp 0.45s 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .strategy-card {
+      background-color: var(--paper-pure);
+      border: 1px solid var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .strategy-card:hover {
+      border-color: var(--ikb);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 47, 167, 0.06);
+    }
+
+    .card-label-bar {
+      padding: 13px 20px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .card-label-bar.observed {
+      background-color: #EFEFEA;
+      color: var(--ink);
+    }
+
+    .card-label-bar.suggested {
+      background-color: var(--ikb);
+      color: #FFFFFF;
+      border-bottom-color: var(--ikb);
+    }
+
+    .card-label-bar.outcome {
+      background-color: var(--ink);
+      color: #FFFFFF;
+    }
+
+    .card-label-bar.visual {
+      background-color: #161616;
+      color: #FFFFFF;
+    }
+
+    /* Spacious Card Content with Strong Vertical Rhythm */
+    .card-content-area {
+      padding: 26px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    /* Big, Bold Swiss Typography Lead */
+    .swiss-headline-lead {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 14px;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .swiss-block-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .swiss-item-box {
+      border: 1px solid var(--border-light);
+      background-color: var(--paper-subtle);
+      padding: 15px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .swiss-item-box:hover {
+      border-color: var(--ikb);
+      background-color: #FFFFFF;
+    }
+
+    .swiss-item-box.accent-ikb {
+      border-color: rgba(0, 47, 167, 0.35);
+      background-color: rgba(0, 47, 167, 0.035);
+    }
+
+    .swiss-item-box.dark-box {
+      background-color: #141414;
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+    }
+
+    .swiss-item-box.orange-box {
+      border-color: rgba(245, 130, 32, 0.4);
+      background-color: rgba(245, 130, 32, 0.05);
+    }
+
+    .swiss-item-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 14.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .swiss-badge-num {
+      background-color: var(--ink);
+      color: #FFFFFF;
+      padding: 4px 9px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .swiss-badge-num-ikb {
+      background-color: var(--ikb);
+      color: #FFFFFF;
+      padding: 4px 9px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .swiss-badge-num-orange {
+      background-color: var(--liranz-orange);
+      color: #FFFFFF;
+      padding: 4px 9px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .swiss-item-title {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .swiss-item-desc {
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--ink-muted);
+    }
+
+    /* Editorial Quote Style in Instrument Serif */
+    .editorial-quote {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-style: italic;
+      line-height: 1.22;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    /* Bullet Items for Diagnostics */
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 18px;
+      line-height: 1.42;
+      color: var(--ink);
+    }
+
+    .bullet-icon {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    /* In-Slide Embedded Video Container */
+    .in-slide-video-box {
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .in-slide-video-box iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+    }
+
+    .in-slide-video-header {
+      padding: 10px 16px;
+      background: var(--ink);
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    .video-direct-btn {
+      color: #FFFFFF;
+      background: #FF0000;
+      border: 1px solid #FF0000;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .video-direct-btn:hover {
+      background: #CC0000;
+    }
+
+    /* Video Navigator List on Slide 4 */
+    .video-selector-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .video-nav-card {
+      padding: 14px 18px;
+      background: var(--paper-pure);
+      border: 1px solid var(--border-dark);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .video-nav-card:hover {
+      border-color: var(--ikb);
+      background-color: var(--paper-subtle);
+    }
+
+    .video-nav-card.active {
+      background-color: var(--ikb);
+      border-color: var(--ikb);
+      color: #FFFFFF;
+    }
+
+    .video-nav-card.active .video-nav-meta,
+    .video-nav-card.active .video-nav-sub {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .video-nav-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .video-nav-meta {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ikb);
+      letter-spacing: 0.08em;
+    }
+
+    .video-nav-sub {
+      font-size: 17px;
+      line-height: 1.4;
+      color: var(--ink-muted);
+    }
+
+    /* Visual Media Preview Container in Cards */
+    .visual-media-box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      background-color: #000000;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .visual-media-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      opacity: 0.95;
+    }
+
+    .visual-media-box:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    .visual-overlay-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 10px;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Full Hairline Swiss Table - 2X SCALED */
+    .swiss-table-container {
+      border: 1px solid var(--ink);
+      background-color: var(--paper-pure);
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .swiss-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 20px;
+    }
+
+    .swiss-table th {
+      background-color: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 16px 22px;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .swiss-table th:last-child {
+      border-right: none;
+    }
+
+    .swiss-table td {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    .swiss-table td:last-child {
+      border-right: none;
+    }
+
+    .swiss-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .swiss-table tr:hover td {
+      background-color: var(--paper-subtle);
+    }
+
+    .ref-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .ref-tag {
+      display: inline-block;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ikb);
+      letter-spacing: 0.08em;
+    }
+
+    /* Cover Slide */
+    .slide-cover {
+      background-color: var(--liranz-navy);
+      color: #FFFFFF;
+      padding: 60px 80px 50px 80px;
+    }
+
+    .cover-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: 18px;
+    }
+
+    .cover-brand {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: 84px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      color: #FFFFFF;
+      margin-top: 36px;
+      max-width: 1550px;
+    }
+
+    .cover-lead {
+      font-size: 28px;
+      line-height: 1.4;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 24px;
+      max-width: 1300px;
+    }
+
+    .cover-grid-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 45px;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 24px;
+    }
+
+    .cover-pillar {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cover-pillar-no {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--liranz-orange);
+      margin-bottom: 6px;
+    }
+
+    .cover-pillar-title {
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-pillar-desc {
+      font-size: 18px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 6px;
+    }
+
+    /* Floating Navigation Controls (Top-Right Dock) with Auto-Hide */
+    #nav-bar {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 7px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #nav-bar.hidden {
+      opacity: 0;
+      transform: translateY(-16px);
+      pointer-events: none;
+    }
+
+    body.idle-cursor {
+      cursor: none !important;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--ikb);
+      border-color: var(--ikb);
+    }
+
+    .nav-counter {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.1em;
+      min-width: 75px;
+      text-align: center;
+    }
+
+    /* Modal for Image Previews */
+    #image-modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(10, 10, 10, 0.94);
+      backdrop-filter: blur(14px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    #image-modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 1200px;
+      max-width: 95vw;
+      background-color: var(--ink);
+      border: 2px solid #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-header {
+      padding: 14px 20px;
+      background-color: var(--ink);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #FFFFFF;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-close {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #FFFFFF;
+      padding: 5px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      background-color: #FF2E2E;
+      border-color: #FF2E2E;
+    }
+
+    .image-modal-body {
+      max-height: 80vh;
+      overflow: hidden;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal-body img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    /* Thumbnail Overview Drawer */
+    #drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 460px;
+      background-color: rgba(15, 15, 15, 0.98);
+      border-left: 2px solid var(--ikb);
+      z-index: 150;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      color: #FFFFFF;
+      overflow: hidden;
+    }
+
+    #drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-title {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ikb);
+    }
+
+    .drawer-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .drawer-item {
+      padding: 12px 16px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .drawer-item:hover, .drawer-item.active {
+      background-color: var(--ikb);
+      border-color: var(--ikb);
+    }
+
+    .drawer-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      opacity: 0.7;
+    }
+
+    .drawer-label {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="stage">
+      <!-- Top Slide Progress Bar -->
+      <div id="slide-progress-bar" style="position: absolute; top: 0; left: 0; height: 4px; background: var(--ikb); width: 2.56%; z-index: 120; transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+
+      <div class="slides-wrapper">
+
+        <!-- ==========================================================================
+             SLIDE 1 — TITLE / COVER
+             ========================================================================== -->
+        <section class="slide slide-cover active" data-slide="1">
+          <div class="cover-top-meta">
+            <div class="cover-brand">
+              <img src="assets/liranz_logo.png" alt="Liranz Logo" class="brand-header-logo" style="height: 38px;">
+              <span>LIRANZ LIMITED · BRAND & GROWTH STRATEGY</span>
+            </div>
+            <div class="mono-meta" style="color: #FFFFFF;">
+              <span>№ 01/28</span>
+              <span style="opacity: 0.5;">|</span>
+              <span>LIRANZ TO THE WORLD</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.35em; color: rgba(255,255,255,0.4); margin-bottom: 12px;">
+              +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+            </div>
+            <h1 class="cover-title">
+              Liranz to the World: Observations, Strategy & Outcomes
+            </h1>
+            <p class="cover-lead editorial-quote" style="color: rgba(255,255,255,0.92); font-size: 30px;">
+              "In the Ghanaian IT space, no one is telling a story like this yet. When we execute this well, we set the national standard for what a modern tech brand looks like."
+            </p>
+          </div>
+
+          <div class="cover-grid-pillars">
+            <div class="cover-pillar">
+              <span class="cover-pillar-no">01 // WHAT I NOTICED</span>
+              <span class="cover-pillar-title">Honest Observations</span>
+              <p class="cover-pillar-desc">Where our brand, website, social presence, and content stand today — and the gaps we need to fix.</p>
+            </div>
+            <div class="cover-pillar">
+              <span class="cover-pillar-no">02 // WHAT WE CAN DO</span>
+              <span class="cover-pillar-title">Practical Action</span>
+              <p class="cover-pillar-desc">Clear, creative moves inspired by global tech brands — tailored specifically for the Ghanaian market.</p>
+            </div>
+            <div class="cover-pillar">
+              <span class="cover-pillar-no">03 // WHAT IT GETS US</span>
+              <span class="cover-pillar-title">Real Outcomes</span>
+              <p class="cover-pillar-desc">A recognized national brand, real community trust, a verified fan base, and measurable inbound leads.</p>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 2 — VISION REFERENCES (GLOBAL BENCHMARK TABLE)
+             ========================================================================== -->
+        <section class="slide" data-slide="2">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">VISION</span>
+                <span>GLOBAL PROOF THAT THIS FORMAT WORKS</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Vision References</h2>
+              <p class="slide-subhead">How the world's best companies tell their story — and why we can do this at Liranz.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 02/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="swiss-table-container">
+              <table class="swiss-table">
+                <thead>
+                  <tr>
+                    <th style="width: 34%;">Reference Company</th>
+                    <th style="width: 66%;">What They Did</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="ref-title">Starbucks 50th Anniversary</div>
+                      <span class="ref-tag">Heritage & Real Purpose</span>
+                    </td>
+                    <td>
+                      <div style="font-weight: 600; color: var(--ink);">
+                        Forward-looking anniversary film featuring real employees (not hired actors) and authentic documentary storytelling.
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="ref-title">We Are Bolt</div>
+                      <span class="ref-tag">Fastest-Growing Tech Company in Europe</span>
+                    </td>
+                    <td>
+                      <div style="font-weight: 600; color: var(--ink);">
+                        Employee-led growth story showing culture and principles narrated directly by staff across departments.
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="ref-title">Challenge the Code · Swissquote</div>
+                      <span class="ref-tag">Rewriting Category Rules</span>
+                    </td>
+                    <td>
+                      <div style="font-weight: 600; color: var(--ink);">
+                        Manifesto anthem film with a bold single-minded message that sets them apart from every traditional bank.
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="ref-title">Keep Thinking with Claude · Anthropic</div>
+                      <span class="ref-tag">Human-Centric Enabler</span>
+                    </td>
+                    <td>
+                      <div style="font-weight: 600; color: var(--ink);">
+                        Clean, minimal concept — positioning technology as the quiet enabler behind people doing great work.
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="ref-title">Our Story So Far · ZEOS</div>
+                      <span class="ref-tag">Scale & Hard Milestones</span>
+                    </td>
+                    <td>
+                      <div style="font-weight: 600; color: var(--ink);">
+                        Fast-paced, metric-driven growth narrative proving scale through real numbers and milestone achievements.
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>GLOBAL BENCHMARK PROOF</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 3 — VISION TAKEAWAY (CENTERED TRANSITIONAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="3" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">KEY TAKEAWAY</span>
+                <span>STRATEGIC PERSPECTIVE</span>
+              </div>
+            </div>
+            <div class="mono-meta">
+              <span>№ 03/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // STRATEGIC PERSPECTIVE
+            </div>
+            <h2 class="editorial-quote" style="font-size: 56px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "These aren't templates to copy — they're proof that this format of storytelling works and is achievable at Liranz's scale."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>LET'S SEE WHAT I MEANT</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>TRANSITIONAL PERSPECTIVE</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 4 — REFERENCE VIDEO THEATER (IN-SLIDE PLAYABLE)
+             ========================================================================== -->
+        <section class="slide" data-slide="4">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge">VIDEO THEATER</span>
+                <span>TACTICAL APPLICATION & INLINE PLAYBACK</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Reference Video Detail Table</h2>
+              <p class="slide-subhead">Click any video below to watch their storytelling approach and see how we apply it to Liranz.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 04/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="grid-16" style="height: 100%; gap: 20px;">
+              
+              <!-- Left: Video Selector (7 cols) -->
+              <div style="grid-column: span 7; height: 100%; display: flex; flex-direction: column;">
+                <div class="video-selector-list">
+                  
+                  <div class="video-nav-card active" onclick="playInSlideVideo('yNQs5gwX1-U', 'Starbucks – 50th Anniversary', 'Emotional close — IT isn\'t just cables, it\'s livelihoods and the digital future of our community.', 'https://www.youtube.com/watch?v=yNQs5gwX1-U', this)">
+                    <div class="video-nav-title">
+                      <span>1. Starbucks – 50th Anniversary</span>
+                      <span class="badge" style="font-size: 10px;">PLAYING</span>
+                    </div>
+                    <span class="video-nav-meta">Bigger Purpose & Authentic Heritage</span>
+                    <p class="video-nav-sub"><strong>Use for Liranz:</strong> Emotional close — &quot;IT isn't just cables and routers, it's the heartbeat of Ghanaian businesses.&quot;</p>
+                  </div>
+
+                  <div class="video-nav-card" onclick="playInSlideVideo('FDNkDBNR7AM', 'Anthropic – Keep Thinking with Claude', 'Day-to-day proof — show clients and teams working smoothly because Liranz IT runs silently in the background.', 'https://www.youtube.com/watch?v=FDNkDBNR7AM', this)">
+                    <div class="video-nav-title">
+                      <span>2. Anthropic – Keep Thinking with Claude</span>
+                      <span class="badge" style="font-size: 10px;">SELECT</span>
+                    </div>
+                    <span class="video-nav-meta">Collaborative Partner · Tech as Silent Enabler</span>
+                    <p class="video-nav-sub"><strong>Use for Liranz:</strong> Real proof — showing clients working without downtime because Liranz IT is always on guard.</p>
+                  </div>
+
+                  <div class="video-nav-card" onclick="playInSlideVideo('8uu_AlnJxEA', 'Swissquote – Challenge the Code', 'Contrast Liranz proactive managed model against the slow break-fix IT shops across Ghana.', 'https://www.youtube.com/watch?v=8uu_AlnJxEA', this)">
+                    <div class="video-nav-title">
+                      <span>3. Swissquote – Challenge the Code</span>
+                      <span class="badge" style="font-size: 10px;">SELECT</span>
+                    </div>
+                    <span class="video-nav-meta">Category Disruptor · Rewriting the Rules</span>
+                    <p class="video-nav-sub"><strong>Use for Liranz:</strong> Boldly contrast Liranz's proactive 24/7 care against lazy &quot;break-fix&quot; competitors in Ghana.</p>
+                  </div>
+
+                  <div class="video-nav-card" onclick="playInSlideVideo('rNSIwjmynYQ', 'Bolt – We Are Bolt', 'Visual pacing reference — fast cuts, Accra energy, business in motion.', 'https://www.youtube.com/watch?v=rNSIwjmynYQ', this)">
+                    <div class="video-nav-title">
+                      <span>4. Bolt – We Are Bolt</span>
+                      <span class="badge" style="font-size: 10px;">SELECT</span>
+                    </div>
+                    <span class="video-nav-meta">High-Velocity & Kinetic Momentum</span>
+                    <p class="video-nav-sub"><strong>Use for Liranz:</strong> Visual pacing reference — energetic cuts, Accra commercial life, and teams in motion.</p>
+                  </div>
+
+                  <div class="video-nav-card" onclick="playInSlideVideo('2FHOuPO8Ecw', 'ZEOS – Our Story So Far', 'Opening hook — flash the numbers: 14 years, 50+ staff, 16 regions, 100+ clients.', 'https://www.youtube.com/watch?v=2FHOuPO8Ecw', this)">
+                    <div class="video-nav-title">
+                      <span>5. ZEOS – Our Story So Far</span>
+                      <span class="badge" style="font-size: 10px;">SELECT</span>
+                    </div>
+                    <span class="video-nav-meta">Growth Narrative · Fast & Metric-Driven</span>
+                    <p class="video-nav-sub"><strong>Use for Liranz:</strong> Opening hook — flash our track record: 14 years, 50+ engineers, 16 regions, 100+ clients.</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Right: Direct Playable In-Slide Video Frame (9 cols) -->
+              <div style="grid-column: span 9; height: 100%; border: 1px solid var(--ink); background: #000; display: flex; flex-direction: column;">
+                <div class="in-slide-video-header">
+                  <span id="inslide-video-title">NOW PLAYING: Starbucks – 50th Anniversary</span>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <a id="inslide-direct-link" href="https://www.youtube.com/watch?v=yNQs5gwX1-U" target="_blank" rel="noopener noreferrer" class="video-direct-btn" title="Open and watch on YouTube in HD">▶ Play on YouTube</a>
+                    <span class="mono-meta" style="color: #00FF88;">● STREAM</span>
+                  </div>
+                </div>
+                <div style="flex: 1; position: relative;">
+                  <iframe id="inslide-player" src="https://www.youtube.com/embed/yNQs5gwX1-U?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                </div>
+                <div style="padding: 14px 20px; background: var(--paper-pure); border-top: 1px solid var(--border-dark); font-size: 16px; line-height: 1.35; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--ikb);">Key Takeaway:</strong> <span id="inslide-takeaway">Emotional close — "IT isn't just cables, it's livelihoods and the digital future of our community."</span>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); flex-shrink: 0; margin-left: 14px;">READY TO WATCH</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>ALL 5 REFERENCE VIDEOS PLAYABLE DIRECTLY IN-SLIDE</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 5 — WHAT WE CAN DO (RECOMMENDATIONS OVERVIEW)
+             ========================================================================== -->
+        <section class="slide" data-slide="5">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">RECOMMENDATIONS</span>
+                <span>THE STRATEGIC ROADMAP</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What We Can Do</h2>
+              <p class="slide-subhead">5 clear, high-impact moves inspired by global tech brands — tailored specifically for Ghana.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 05/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="grid-16" style="height: 100%; gap: 16px;">
+              
+              <!-- 1. Docu-Ad -->
+              <div class="strategy-card" style="grid-column: span 3; display: flex; flex-direction: column;">
+                <div class="card-label-bar suggested" style="padding: 10px 14px; font-size: 12.5px;">
+                  <span>01 // HERO FILM</span>
+                  <span>DOCU-AD</span>
+                </div>
+                <div class="card-content-area" style="padding: 20px 16px; gap: 10px;">
+                  <span class="swiss-item-title" style="font-size: 20px; color: var(--ikb);">Hero Docu-Ad</span>
+                  <p class="swiss-item-desc" style="font-size: 15.5px;">
+                    Make a real documentary ad like Starbucks & Bolt — featuring our real engineers, datacenter, and 14-year journey.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2. Social Revamp -->
+              <div class="strategy-card" style="grid-column: span 3; display: flex; flex-direction: column;">
+                <div class="card-label-bar suggested" style="padding: 10px 14px; font-size: 12.5px;">
+                  <span>02 // COMMUNITY</span>
+                  <span>VERIFICATION</span>
+                </div>
+                <div class="card-content-area" style="padding: 20px 16px; gap: 10px;">
+                  <span class="swiss-item-title" style="font-size: 20px; color: var(--ikb);">Social Media Revamp</span>
+                  <p class="swiss-item-desc" style="font-size: 15.5px;">
+                    Overhaul our social channels with consistent Swiss design, build a genuine fan base, and get verified blue badges.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 3. Flyer System -->
+              <div class="strategy-card" style="grid-column: span 3; display: flex; flex-direction: column;">
+                <div class="card-label-bar suggested" style="padding: 10px 14px; font-size: 12.5px;">
+                  <span>03 // IDENTITY</span>
+                  <span>GUIDELINES</span>
+                </div>
+                <div class="card-content-area" style="padding: 20px 16px; gap: 10px;">
+                  <span class="swiss-item-title" style="font-size: 20px; color: var(--ikb);">Creative Flyer Kit</span>
+                  <p class="swiss-item-desc" style="font-size: 15.5px;">
+                    Create strict brand guidelines and reusable templates so every campaign flyer is 100% on-brand and instant to assemble.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 4. Reels OKR -->
+              <div class="strategy-card" style="grid-column: span 3; display: flex; flex-direction: column;">
+                <div class="card-label-bar suggested" style="padding: 10px 14px; font-size: 12.5px;">
+                  <span>04 // GOVERNANCE</span>
+                  <span>OKR & KPI</span>
+                </div>
+                <div class="card-content-area" style="padding: 20px 16px; gap: 10px;">
+                  <span class="swiss-item-title" style="font-size: 20px; color: var(--ikb);">Reels OKR Framework</span>
+                  <p class="swiss-item-desc" style="font-size: 15.5px;">
+                    Tie every reel directly to a business objective and measurable KPI — no more posting just for the sake of posting.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 5. Billboards -->
+              <div class="strategy-card" style="grid-column: span 4; display: flex; flex-direction: column;">
+                <div class="card-label-bar suggested" style="padding: 10px 14px; font-size: 12.5px;">
+                  <span>05 // PHYSICAL REACH</span>
+                  <span>ACCRA OOH</span>
+                </div>
+                <div class="card-content-area" style="padding: 20px 16px; gap: 10px;">
+                  <span class="swiss-item-title" style="font-size: 20px; color: var(--ikb);">Targeted Billboards</span>
+                  <p class="swiss-item-desc" style="font-size: 15.5px;">
+                    Introduce bold physical billboard campaigns in prime business corridors (Airport City & Ridge Financial District).
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Action Navigation Cue -->
+            <div style="margin-top: 16px; padding: 14px 22px; background-color: var(--ink); color: #FFFFFF; display: flex; justify-content: space-between; align-items: center;">
+              <span class="editorial-quote" style="font-size: 24px; color: #FFFFFF;">
+                "Let's dive into Action 01 — The Docu-Ad Campaign & Narrative Structure."
+              </span>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer;" onclick="nextSlide()">
+                <span>EXPLORE ACTION 01</span>
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>STRATEGIC RECOMMENDATIONS OVERVIEW</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 6 — DOCU-AD CONCEPT: 3-ACT NARRATIVE STRUCTURE
+             ========================================================================== -->
+        <section class="slide" data-slide="6">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 01</span>
+                <span>HERO CONTENT PRODUCTION</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Docu-Ad Concept</h2>
+              <p class="slide-subhead">Making a documentary ad involving our real team and our journey — not stock actors.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 06/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-visual-split">
+              
+              <!-- Left: Visual Still Card -->
+              <div class="strategy-card">
+                <div class="card-label-bar visual">
+                  <span>CINEMATIC FILM STILL</span>
+                  <span>PREVIEW</span>
+                </div>
+                <div class="visual-media-box" onclick="openImage('assets/docu_ad_cinematic.jpg', 'Docu-Ad Cinematic Film Still: Authentic Liranz Team in Accra Datacenter')">
+                  <img src="assets/docu_ad_cinematic.jpg" alt="Liranz Docu-Ad Still">
+                  <div class="visual-overlay-tag">
+                    <span>LIRANZ DOCU-AD STILL · ACCRA</span>
+                    <span style="color: var(--ikb);">⤢ ENLARGE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: What I Noticed & What We Can Do -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;">
+                
+                <div class="strategy-card">
+                  <div class="card-label-bar observed">
+                    <span>01 // What I Noticed</span>
+                    <span>THE GAP</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead">
+                      Every Ghanaian IT competitor uses boring stock photos and dry service lists.
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Impersonal & Generic</span>
+                        <p class="swiss-item-desc">Competitors hide behind generic computer photos and dry corporate spec sheets.</p>
+                      </div>
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Massive Open Space</span>
+                        <p class="swiss-item-desc">Nobody in Ghana is telling an authentic human story about their engineers and track record.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="strategy-card">
+                  <div class="card-label-bar suggested">
+                    <span>02 // What We Can Do</span>
+                    <span>3-ACT JOURNEY FILM</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      A 3-Act Journey Film featuring our real people:
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">01</span>
+                          <span>Credibility & Disruption</span>
+                        </div>
+                        <p class="swiss-item-desc">Swissquote-style bold manifesto: rewriting Ghana's IT standard with 14 years of scale.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">02</span>
+                          <span>Human Connection</span>
+                        </div>
+                        <p class="swiss-item-desc">Anthropic-style proof: showing our clients working smoothly without downtime.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">03</span>
+                          <span>Bigger Purpose</span>
+                        </div>
+                        <p class="swiss-item-desc">Starbucks-style emotional close on community growth and Ghana's digital future.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>DOCU-AD CAMPAIGN CONCEPT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 7 — DOCU-AD: SHOWCASE & DISTRIBUTION CHANNELS
+             ========================================================================== -->
+        <section class="slide" data-slide="7">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 01</span>
+                <span>SHOWCASE & DISTRIBUTION CHANNELS</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Where & How We Air the Docu-Ad</h2>
+              <p class="slide-subhead">Multi-channel distribution to reach executives, decision-makers, and the wider Ghanaian market.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 07/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-triptych" style="height: auto; margin-bottom: 20px;">
+              
+              <!-- 01 // TV Stations -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>01 // BROADCAST TV</span>
+                  <span>MASS PRESTIGE</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">01</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">National TV Broadcasts</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Air short docu-ad cutdowns on prominent TV stations during daily business and IT news segments to reach the wider Ghanaian populace.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 02 // Targeted Social Ads -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // TARGETED ADS</span>
+                  <span>DECISION-MAKERS</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">02</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Targeted Social Media Ads</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Run laser-focused ad campaigns on LinkedIn and Meta specifically targeted at enterprise CEOs, CTOs, and IT directors across Ghana.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 03 // Organic Social & YouTube -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>03 // DIGITAL HOME</span>
+                  <span>EVERGREEN ASSET</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">03</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Organic Social & YouTube</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Feature the full-length documentary on our YouTube channel, website hero section, and company LinkedIn page as our flagship brand asset.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Governance Callout -->
+            <div style="padding: 20px 26px; background: #FFF6EE; border: 2px solid var(--liranz-orange); border-left: 8px solid var(--liranz-orange); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="mono-meta" style="color: var(--liranz-orange); margin-bottom: 4px; display: block;">CORE STRATEGIC RULE</span>
+                <span style="font-size: 20px; font-weight: 700; color: var(--ink);">
+                  All showcase channels will depend directly on our main business objective — why we are producing this film and the exact result we want it to achieve.
+                </span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; margin-left: 20px;" onclick="nextSlide()">
+                <span>SEE WHAT IT GETS US →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>DOCU-AD SHOWCASE & DISTRIBUTION CHANNELS</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 8 — DOCU-AD: WHAT DOES IT GET US? (CENTERED EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="8" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 01</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 08/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // THE IMPACT & OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 54px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "Well, when done well and executed properly... we become unmatched — although we are already unmatched!"
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 02: SOCIAL MEDIA REVAMP</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>THE OUTCOME STATEMENT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 9 — SOCIAL MEDIA REVAMP (DIAGNOSIS & ACTION)
+             ========================================================================== -->
+        <section class="slide" data-slide="9">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 02</span>
+                <span>SOCIAL MEDIA OVERHAUL</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Social Media Revamp</h2>
+              <p class="slide-subhead">Building a real fan base, getting verified, and looking like an industry leader.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 09/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-duo">
+              
+              <!-- What I noticed -->
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>01 // What I Noticed</span>
+                  <span>THE GAP</span>
+                </div>
+                <div class="card-content-area" style="padding: 30px 28px; gap: 18px;">
+                  <h4 class="swiss-headline-lead">
+                    Our social platforms are just posting randomly without building an active fan base or getting verified.
+                  </h4>
+                  <div class="swiss-block-list">
+                    <div class="swiss-item-box">
+                      <span class="swiss-item-title">Inconsistent Look & Feel</span>
+                      <p class="swiss-item-desc">Posts use mismatched layouts and colors, making our feed look disjointed.</p>
+                    </div>
+                    <div class="swiss-item-box">
+                      <span class="swiss-item-title">Missing Blue Badge</span>
+                      <p class="swiss-item-desc">Without official verification, we miss out on instant institutional credibility.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- What we can do -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // What We Can Do</span>
+                  <span>3-STEP REVAMP</span>
+                </div>
+                <div class="card-content-area" style="padding: 30px 28px; gap: 16px;">
+                  <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                    Execute a Focused 3-Step Social Revamp:
+                  </h4>
+                  <div class="swiss-block-list">
+                    <div class="swiss-item-box accent-ikb">
+                      <div class="swiss-item-header">
+                        <span class="swiss-badge-num-ikb">01</span>
+                        <span>Consistent Swiss Look</span>
+                      </div>
+                      <p class="swiss-item-desc">Strict typographic and color rules across LinkedIn, X, Meta, and YouTube.</p>
+                    </div>
+                    <div class="swiss-item-box accent-ikb">
+                      <div class="swiss-item-header">
+                        <span class="swiss-badge-num-ikb">02</span>
+                        <span>Get Officially Verified</span>
+                      </div>
+                      <p class="swiss-item-desc">Apply for official blue verification badges across executive and company pages.</p>
+                    </div>
+                    <div class="swiss-item-box accent-ikb">
+                      <div class="swiss-item-header">
+                        <span class="swiss-badge-num-ikb">03</span>
+                        <span>Build Real Fans</span>
+                      </div>
+                      <p class="swiss-item-desc">Create recurring series (IT masterclasses, team stories) people actually want to follow.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>SOCIAL MEDIA REBRAND PLAYBOOK</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 10 — SOCIAL MEDIA: CHANNELS & AUDIENCE STRATEGY
+             ========================================================================== -->
+        <section class="slide" data-slide="10">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 02</span>
+                <span>CHANNEL STRATEGY & CADENCE</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Social Media: Channel Execution</h2>
+              <p class="slide-subhead">Demarcating platforms to match exact business audience behavior across Ghana.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 10/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-triptych" style="height: auto; margin-bottom: 20px;">
+              
+              <!-- 01 // LinkedIn -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>01 // LINKEDIN</span>
+                  <span>ENTERPRISE & B2B</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">01</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">LinkedIn (Enterprise B2B)</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Executive thought leadership, technical whitepapers, case studies, and corporate IT milestones for decision-makers.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 02 // Meta & X -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // META & X</span>
+                  <span>SME & COMMUNITY</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">02</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Meta & X (Community & SMEs)</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Snackable IT safety tips, team culture, client spotlight stories, and high-energy company announcements.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 03 // YouTube Shorts & Reels -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>03 // VIDEO REELS</span>
+                  <span>HIGH-RETENTION REACH</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">03</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">YouTube Shorts & Reels</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Fast-paced 45-second problem-and-solution videos that demonstrate Liranz's engineering mastery in real-world scenarios.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Governance Callout -->
+            <div style="padding: 20px 26px; background: #FFF6EE; border: 2px solid var(--liranz-orange); border-left: 8px solid var(--liranz-orange); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="mono-meta" style="color: var(--liranz-orange); margin-bottom: 4px; display: block;">CORE STRATEGIC RULE</span>
+                <span style="font-size: 20px; font-weight: 700; color: var(--ink);">
+                  Every post must reinforce our locked visual identity and drive toward verification, community growth, or inbound leads.
+                </span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; margin-left: 20px;" onclick="nextSlide()">
+                <span>SEE WHAT IT GETS US →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>SOCIAL MEDIA CHANNEL EXECUTION</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 11 — SOCIAL MEDIA: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="11" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 02</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 11/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // SOCIAL REBRAND OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 52px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "Our social platforms stop being quiet feeds and start building a loyal, verified fan base that drives real inbound inquiries."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 03: CREATIVE FLYER SYSTEM</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>SOCIAL MEDIA IMPACT STATEMENT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 12 — CREATIVE FLYER SYSTEM (SPECIMEN & PLAN)
+             ========================================================================== -->
+        <section class="slide" data-slide="12">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 03</span>
+                <span>BRAND IDENTITY GUIDELINES</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Creative Flyer System</h2>
+              <p class="slide-subhead">Making all our flyers look like they come from one cohesive brand.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 12/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-visual-split">
+              
+              <!-- Left: Visual Specimen -->
+              <div class="strategy-card">
+                <div class="card-label-bar visual">
+                  <span>SYSTEM SPECIMEN</span>
+                  <span>PREVIEW</span>
+                </div>
+                <div class="visual-media-box" onclick="openImage('assets/brand_guidelines_flyers.jpg', 'Liranz Swiss Brand Identity Manual & Flyer System Specimen')">
+                  <img src="assets/brand_guidelines_flyers.jpg" alt="Liranz Brand Guidelines Mockup">
+                  <div class="visual-overlay-tag">
+                    <span>LIRANZ BRAND MANUAL & FLYERS</span>
+                    <span style="color: var(--ikb);">⤢ ENLARGE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Question & Action -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;">
+                
+                <div class="strategy-card">
+                  <div class="card-label-bar observed">
+                    <span>01 // Question to Ask</span>
+                    <span>INQUIRY</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      Do we currently have a documented brand identity guideline our flyers are built against?
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Current Flyers Look Disconnected</span>
+                        <p class="swiss-item-desc">Without clear rules, every designer picks random fonts, colors, and layout styles.</p>
+                      </div>
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Diluted Brand Recall</span>
+                        <p class="swiss-item-desc">Audiences see our posts but don't instantly link them back to a single market leader.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="strategy-card">
+                  <div class="card-label-bar suggested">
+                    <span>02 // If No — Suggest</span>
+                    <span>ACTION</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      Make One & Build Reusable Flyer Kits:
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">01</span>
+                          <span>Locked Brand Colors</span>
+                        </div>
+                        <p class="swiss-item-desc">Navy (#0D223A), Orange (#F58220), Blue (#002FA7), and Neutrals.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">02</span>
+                          <span>Clean Typography & Grids</span>
+                        </div>
+                        <p class="swiss-item-desc">Fixed font sizes and clean zero-radius layouts that look world-class.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">03</span>
+                          <span>Reusable Templates</span>
+                        </div>
+                        <p class="swiss-item-desc">Pre-built templates so the team can assemble announcements in minutes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>CREATIVE CAMPAIGN FLYERS</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 13 — FLYER SYSTEM: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="13" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 03</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 13/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // FLYER SYSTEM OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 52px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "Every single piece of content reinforces the exact same brand — giving Liranz instant visual recall and 10x faster turnaround."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 04: REELS & OKR FRAMEWORK</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>FLYER SYSTEM IMPACT STATEMENT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 14 — REELS & OKR FRAMEWORK (MEASUREMENT & GOVERNANCE TABLE)
+             ========================================================================== -->
+        <section class="slide" data-slide="14">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 04</span>
+                <span>MEASUREMENT & PERFORMANCE GOVERNANCE</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Reels & OKR Framework</h2>
+              <p class="slide-subhead">Connecting every reel directly to a real business objective and measurable KPI.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 14/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <!-- Top: 3-column brief -->
+            <div class="grid-16" style="margin-bottom: 20px;">
+              <div style="grid-column: span 5; background: var(--paper-pure); border: 1px solid var(--border-dark); padding: 20px 22px;">
+                <span class="mono-meta" style="color: var(--ikb); margin-bottom: 6px; display: block;">QUESTION TO ASK</span>
+                <p style="font-size: 17px; line-height: 1.4; font-weight: 600;">
+                  What is the actual objective behind each reel, and by what standards do we measure if it worked?
+                </p>
+              </div>
+
+              <div style="grid-column: span 6; background: var(--ikb); color: #FFFFFF; padding: 20px 22px;">
+                <span class="mono-meta" style="color: rgba(255,255,255,0.7); margin-bottom: 6px; display: block;">IF NO — WHAT I SUGGEST</span>
+                <p style="font-size: 17px; line-height: 1.4; font-weight: 500;">
+                  Tie every reel to a clear OKR before it's made — define the objective, then the KPI that proves it worked.
+                </p>
+              </div>
+
+              <div style="grid-column: span 5; background: var(--ink); color: #FFFFFF; padding: 20px 22px;">
+                <span class="mono-meta" style="color: rgba(255,255,255,0.7); margin-bottom: 6px; display: block;">EXPECTED OUTCOME</span>
+                <p style="font-size: 17px; line-height: 1.4; font-weight: 500;">
+                  Content becomes measurable and justifiable, instead of just "posting for the sake of posting."
+                </p>
+              </div>
+            </div>
+
+            <!-- Bottom: Framework table (exact requested table) -->
+            <div class="swiss-table-container">
+              <table class="swiss-table">
+                <thead>
+                  <tr>
+                    <th style="width: 22%;">Framework Level</th>
+                    <th style="width: 22%;">Term Used</th>
+                    <th style="width: 36%;">What It Means</th>
+                    <th style="width: 20%;">Examples</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong style="font-family: var(--font-display); font-size: 20px;">Executive Level</strong>
+                    </td>
+                    <td><span class="badge" style="background-color: var(--ink); color: var(--paper);">Business Objectives</span></td>
+                    <td>High-level goals tied to company growth and revenue</td>
+                    <td><em>Increase annual revenue by 15%</em></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong style="font-family: var(--font-display); font-size: 20px;">Strategic Level</strong>
+                    </td>
+                    <td><span class="badge-ikb">Marketing Objectives</span></td>
+                    <td>Goals focused on audience behavior and market positioning</td>
+                    <td><em>Boost brand awareness; Acquire new users</em></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>OKR MEASUREMENT FRAMEWORK</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 15 — REELS: CHANNELS & FORMAT STRATEGY
+             ========================================================================== -->
+        <section class="slide" data-slide="15">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 04</span>
+                <span>CONTENT FORMATS & CHANNELS</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Reels: Format & Channel Allocation</h2>
+              <p class="slide-subhead">Pairing specific video styles to clear measurable marketing and business OKRs.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 15/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-triptych" style="height: auto; margin-bottom: 20px;">
+              
+              <!-- 01 // LinkedIn Thought Clips -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>01 // LINKEDIN CLIPS</span>
+                  <span>AUTHORITY OKR</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">01</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Executive Thought Clips</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    30–60s clips of our CEO and senior engineers breaking down complex cloud security issues for Ghanaian executives.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 02 // Tech Explainers -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // INSTAGRAM / TIKTOK</span>
+                  <span>AWARENESS OKR</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">02</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Everyday IT Mistakes</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Engaging short videos exposing common IT errors businesses in Accra make — positioning Liranz as the immediate solution.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 03 // Website Video Shorts -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>03 // WEBSITE EMBEDS</span>
+                  <span>CONVERSION OKR</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">03</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Service Page Proof Clips</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Embedded 20-second video testimonials on specific service pages directly boosting contact form completion rates.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Governance Callout -->
+            <div style="padding: 20px 26px; background: #FFF6EE; border: 2px solid var(--liranz-orange); border-left: 8px solid var(--liranz-orange); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="mono-meta" style="color: var(--liranz-orange); margin-bottom: 4px; display: block;">CORE STRATEGIC RULE</span>
+                <span style="font-size: 20px; font-weight: 700; color: var(--ink);">
+                  If a video concept cannot be tied to a defined OKR and tracked metric, we do not spend production resources on it.
+                </span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; margin-left: 20px;" onclick="nextSlide()">
+                <span>SEE WHAT IT GETS US →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>REELS FORMAT & CHANNEL ALLOCATION</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 16 — REELS OKR: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="16" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 04</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 16/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // OKR GOVERNANCE OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 52px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "No more posting just for the sake of posting — every single video is tied directly to measurable business growth and lead generation."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 05: BILLBOARD CAMPAIGNS</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>REELS OKR IMPACT STATEMENT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 17 — BILLBOARD CAMPAIGNS (ACCRA OOH MOCKUP & STRATEGY)
+             ========================================================================== -->
+        <section class="slide" data-slide="17">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 05</span>
+                <span>OUT-OF-HOME PHYSICAL CAMPAIGNS</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Billboard Campaigns</h2>
+              <p class="slide-subhead">Introducing targeted creative billboard campaigns in prime Accra business corridors.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 17/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-visual-split">
+              
+              <!-- Left: Visual Billboard Mockup -->
+              <div class="strategy-card">
+                <div class="card-label-bar visual">
+                  <span>OUTDOOR MOCKUP</span>
+                  <span>PREVIEW</span>
+                </div>
+                <div class="visual-media-box" onclick="openImage('assets/billboard_accra_mockup.jpg', 'Liranz Airport City Accra Outdoor Billboard Campaign')">
+                  <img src="assets/billboard_accra_mockup.jpg" alt="Liranz Billboard Mockup in Accra">
+                  <div class="visual-overlay-tag">
+                    <span>LIRANZ ACCRA AIRPORT CITY OOH</span>
+                    <span style="color: var(--ikb);">⤢ ENLARGE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Diagnosis & Action -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;">
+                
+                <div class="strategy-card">
+                  <div class="card-label-bar observed">
+                    <span>01 // What I Noticed</span>
+                    <span>THE OPPORTUNITY</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead">
+                      We currently have zero creative billboard presence in Accra's top business hubs.
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Missed Daily Commutes</span>
+                        <p class="swiss-item-desc">Enterprise CEOs, CTOs, and business owners drive past Airport City and Ridge every day without seeing Liranz.</p>
+                      </div>
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Physical Stature</span>
+                        <p class="swiss-item-desc">High-visibility billboards reinforce our digital presence and prove Liranz is a major national player.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="strategy-card">
+                  <div class="card-label-bar suggested">
+                    <span>02 // What We Can Do</span>
+                    <span>ACTION</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      Targeted Billboard Rollout:
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">01</span>
+                          <span>Punchy, High-Impact Copy</span>
+                        </div>
+                        <p class="swiss-item-desc">Bold one-liners: "PROACTIVE IT INFRASTRUCTURE. ZERO DOWNTIME."</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">02</span>
+                          <span>Key Commercial Nodes</span>
+                        </div>
+                        <p class="swiss-item-desc">Lock down Airport City, Ridge Financial Corridor, and Tema Industrial entrance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>OUT-OF-HOME PHYSICAL CAMPAIGNS</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 18 — BILLBOARDS: EXPLORING STRATEGIC LOCATIONS
+             ========================================================================== -->
+        <section class="slide" data-slide="18">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 05</span>
+                <span>FEASIBILITY & LOCATION RESEARCH</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Billboard Placement: Exploring Locations</h2>
+              <p class="slide-subhead">If considered in relation to our business and marketing objectives, we could research potential locations to mount them.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 18/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-triptych" style="height: auto; margin-bottom: 24px;">
+              
+              <!-- 01 // Airport City Corridor -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>01 // POTENTIAL LOCATION</span>
+                  <span>AIRPORT CORRIDOR</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">01</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Airport City Area</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Could be researched to reach corporate leadership, multinational partners, and enterprise decision-makers on daily commutes.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 02 // Ridge Financial District -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // POTENTIAL LOCATION</span>
+                  <span>RIDGE FINANCIAL</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">02</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Ridge Financial District</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Could be explored given the heavy concentration of commercial banks, insurance firms, and institutions needing managed IT.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 03 // Commercial Industrial Arteries -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>03 // POTENTIAL LOCATION</span>
+                  <span>COMMERCIAL ARTERIES</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">03</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Major Commercial Routes</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Could look at high-traffic industrial and business routes like Spintex or Tema where manufacturing operations are centered.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dialed-Down Context Bar -->
+            <div style="padding: 20px 26px; background: var(--paper-pure); border: 1px solid var(--border-dark); border-left: 8px solid var(--ikb); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="mono-meta" style="color: var(--ikb); margin-bottom: 4px; display: block;">STRATEGIC CONSIDERATION</span>
+                <span style="font-size: 19px; font-weight: 600; color: var(--ink);">
+                  Of course, whether we mount billboards and where we place them will depend directly on our overall business and marketing objectives — why we are doing this and what we want to achieve.
+                </span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; margin-left: 20px;" onclick="nextSlide()">
+                <span>SEE WHAT IT GETS US →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>FEASIBILITY & LOCATION RESEARCH</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 19 — BILLBOARDS: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="19" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 05</span>
+                <span>STRATEGIC PERSPECTIVE</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Add?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 19/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // STRATEGIC PERSPECTIVE
+            </div>
+            <h2 class="editorial-quote" style="font-size: 50px; line-height: 1.3; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "I believe it adds to the main objective, that is, showcase Liranz to the world, with a strong social presence, as well I know budget will also play a part. 👀"
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 06: EDUCATION & COMMUNITY</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>STRATEGIC VALUE & BUDGET PERSPECTIVE</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 20 — EDUCATION & COMMUNITY (BENCHMARK VIDEO & STRATEGY)
+             ========================================================================== -->
+        <section class="slide" data-slide="20">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 06</span>
+                <span>EDUCATION & COMMUNITY AUTHORITY</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Education & Community</h2>
+              <p class="slide-subhead">Leading Ghana's IT sector through education, face-to-face masterclasses, and open CSR initiatives.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 20/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-visual-split">
+              
+              <!-- Left: In-Slide Video Player -->
+              <div class="strategy-card">
+                <div class="card-label-bar visual">
+                  <span>BENCHMARK CHANNEL</span>
+                  <span>PLAYABLE</span>
+                </div>
+                <div class="in-slide-video-box">
+                  <div class="in-slide-video-header">
+                    <span>CORP TECH EDUCATION REFERENCE</span>
+                    <a href="https://www.youtube.com/watch?v=vBIyy66HsGA" target="_blank" rel="noopener noreferrer" class="video-direct-btn">▶ Play on YouTube</a>
+                  </div>
+                  <iframe src="https://www.youtube.com/embed/vBIyy66HsGA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </div>
+
+              <!-- Right: What I Noticed & What We Can Do -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;">
+                
+                <div class="strategy-card">
+                  <div class="card-label-bar observed">
+                    <span>01 // What I Noticed</span>
+                    <span>THE OPPORTUNITY</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead">
+                      Liranz has an open runway to lead through education and community empowerment.
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Global Benchmark Proof</span>
+                        <p class="swiss-item-desc">Corporate Technologies built massive authority simply by educating businesses on everyday IT.</p>
+                      </div>
+                      <div class="swiss-item-box">
+                        <span class="swiss-item-title">Educators Win Trust</span>
+                        <p class="swiss-item-desc">The company that educates the market and empowers young engineers becomes the trusted institution they hire.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="strategy-card">
+                  <div class="card-label-bar suggested">
+                    <span>02 // What We Can Do</span>
+                    <span>4-PART ACTION PLAN</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      Integrated Education & Community Plan:
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">01</span>
+                          <span>YouTube & IT Knowledge Base</span>
+                        </div>
+                        <p class="swiss-item-desc">Practical IT tutorial videos, case study breakdowns, and cybersecurity guides.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">02</span>
+                          <span>Face-to-Face Masterclasses</span>
+                        </div>
+                        <p class="swiss-item-desc">In-person certified masterclasses in Accra to scale LinkedIn presence and executive connections.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">03</span>
+                          <span>Open-Source / SaaS CSR Tools</span>
+                        </div>
+                        <p class="swiss-item-desc">Free diagnostic IT utilities for the community (just like Cisco & Lenovo CSR playbooks).</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <div class="swiss-item-header">
+                          <span class="swiss-badge-num-ikb">04</span>
+                          <span>IPMC Course Partnership</span>
+                        </div>
+                        <p class="swiss-item-desc">Partner with institutions like IPMC to launch certified vocational IT programs.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>EDUCATION & COMMUNITY ROADMAP</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 21 — EDUCATION & COMMUNITY: DEPLOYMENT CHANNELS
+             ========================================================================== -->
+        <section class="slide" data-slide="21">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 06</span>
+                <span>DEPLOYMENT CHANNELS & CSR</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Education & Community: Deployment Channels</h2>
+              <p class="slide-subhead">Deploying digital video tutorials, certified masterclasses, and community CSR utilities.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 21/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-triptych" style="height: calc(100% - 50px); margin-bottom: 12px;">
+              
+              <!-- 01 // YouTube & Digital Knowledge Base -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>01 // DIGITAL & YOUTUBE</span>
+                  <span>SEARCH AUTHORITY</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">01</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">YouTube Video Knowledge Base</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Practical video breakdowns, cybersecurity guides, and tech tutorials that establish long-term search authority for Ghanaian businesses.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 02 // Certified Masterclasses & IPMC -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // MASTERCLASSES & IPMC</span>
+                  <span>EXECUTIVE NETWORKING</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">02</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">In-Person Classes & Certifications</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Quarterly face-to-face masterclasses in Accra and co-certified vocational IT courses with IPMC — scaling our executive LinkedIn reach and talent pool.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 03 // Open-Source Tools & CSR -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>03 // OPEN-SOURCE & CSR</span>
+                  <span>COMMUNITY RESPECT</span>
+                </div>
+                <div class="card-content-area" style="padding: 28px 24px; gap: 14px;">
+                  <div class="swiss-item-header">
+                    <span class="swiss-badge-num-ikb" style="font-size: 15px; padding: 5px 11px;">03</span>
+                    <span style="font-family: var(--font-display); font-size: 23px; font-weight: 800; color: var(--ink);">Free IT Diagnostic SaaS Tools</span>
+                  </div>
+                  <p style="font-size: 19px; line-height: 1.45; color: var(--ink-muted);">
+                    Free network latency and cybersecurity diagnostic utilities launched on Product Hunt and GitHub as community CSR initiatives (like Cisco & Lenovo).
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div style="display: flex; justify-content: flex-end; align-items: center;">
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer;" onclick="nextSlide()">
+                <span>SEE WHAT IT GETS US →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>EDUCATION & COMMUNITY DEPLOYMENT CHANNELS</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 22 — EDUCATION & COMMUNITY: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="22" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 06</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 22/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // EDUCATION & COMMUNITY AUTHORITY OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 50px; line-height: 1.3; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "I believe this doesn't just fulfill our Corporate Social Responsibility (CSR), in return, it sells Liranz to the world — a foundational IT solidarity."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 07: WEBSITE AUDIT & REVAMP</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>EDUCATION & COMMUNITY AUTHORITY IMPACT STATEMENT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 23 — WEBSITE AUDIT: SPEED DIAGNOSTIC & CRITICAL CALLOUT
+             ========================================================================== -->
+        <section class="slide" data-slide="23">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-orange">CRITICAL AUDIT</span>
+                <span>PAGE SPEED & BOUNCE DIAGNOSTIC</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Website Audit: Speed & Performance</h2>
+              <p class="slide-subhead">Why our current website is losing potential clients before they even see what we do.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 23/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            
+            <!-- Hero Callout Box in Instrument Serif -->
+            <div style="background-color: #FFF6EE; border: 2px solid var(--liranz-orange); border-left: 10px solid var(--liranz-orange); padding: 22px 28px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 18px;">
+                <span style="background: var(--liranz-orange); color: #FFFFFF; font-family: var(--font-mono); font-size: 13px; font-weight: 800; padding: 6px 12px; text-transform: uppercase; letter-spacing: 0.1em; flex-shrink: 0;">AUDIT CALLOUT</span>
+                <span class="editorial-quote" style="font-size: 30px; color: var(--ink); line-height: 1.25;">
+                  "Your site takes 19 seconds to fully load — and nearly 10MB of that is two autoplay videos most visitors never asked for."
+                </span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 800; color: #D32F2F; background: rgba(211,47,47,0.1); border: 1px solid #D32F2F; padding: 8px 16px; flex-shrink: 0; margin-left: 20px;">
+                GRADE: E (35/100) · 19.4s LOAD
+              </div>
+            </div>
+
+            <!-- Key Speed Metrics Breakdown -->
+            <div class="strategy-triptych">
+              
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>METRIC 01</span>
+                  <span>TOTAL LOAD TIME</span>
+                </div>
+                <div class="card-content-area" style="padding: 26px 22px; gap: 10px;">
+                  <span style="font-family: var(--font-mono); font-size: 44px; font-weight: 900; color: #D32F2F;">19.4s</span>
+                  <span style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink);">Fully Loaded Time</span>
+                  <p style="font-size: 17px; line-height: 1.45; color: var(--ink-muted);">
+                    Most website visitors leave if a page takes more than <strong>3 seconds</strong> to load. We are losing clients at the front door.
+                  </p>
+                </div>
+              </div>
+
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>METRIC 02</span>
+                  <span>PAGE WEIGHT & REQUESTS</span>
+                </div>
+                <div class="card-content-area" style="padding: 26px 22px; gap: 10px;">
+                  <span style="font-family: var(--font-mono); font-size: 44px; font-weight: 900; color: #D32F2F;">12.2MB</span>
+                  <span style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink);">Across 195 Requests</span>
+                  <p style="font-size: 17px; line-height: 1.45; color: var(--ink-muted);">
+                    Roughly <strong>4–10x heavier</strong> than a well-built business website, creating massive lag on mobile data.
+                  </p>
+                </div>
+              </div>
+
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>METRIC 03</span>
+                  <span>AUTOPLAY BOTTLENECK</span>
+                </div>
+                <div class="card-content-area" style="padding: 26px 22px; gap: 10px;">
+                  <span style="font-family: var(--font-mono); font-size: 44px; font-weight: 900; color: #D32F2F;">9.09MB</span>
+                  <span style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink);">Two Autoplay Background Videos</span>
+                  <p style="font-size: 17px; line-height: 1.45; color: var(--ink-muted);">
+                    Two video files (5.18MB + 3.9MB) are the single biggest cause of the slowdown that visitors never asked for.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>GTMETRIX SPEED AUDIT DIAGNOSTIC</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 24 — WEBSITE AUDIT: 11-POINT TECHNICAL FINDINGS
+             ========================================================================== -->
+        <section class="slide" data-slide="24">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 07</span>
+                <span>ITEMIZED TECHNICAL DIAGNOSTIC</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Website Audit: 11 Specific Issues</h2>
+              <p class="slide-subhead">Broken scripts, crawler blocks, and layout bugs that need immediate fixing.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 24/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-duo">
+              
+              <!-- Column 01: Performance & Script Errors -->
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>TECHNICAL AUDIT (ISSUES 1–6)</span>
+                  <span>SPEED & SCRIPT BUGS</span>
+                </div>
+                <div class="card-content-area" style="padding: 22px 20px; gap: 12px;">
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>GTmetrix Performance grade:</strong> E (35/100)</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Fully Loaded Time:</strong> 19.4 seconds — most visitors leave before 3 seconds</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Total page size:</strong> 12.2MB across 195 requests — roughly 4–10x heavier than normal</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>9.09MB autoplay video:</strong> (5.18MB + 3.9MB) — single biggest cause of slowdown</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Time to Interactive:</strong> 10.4 seconds — buttons may not respond for over 10s</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Hanging Script (webworker.js):</strong> Fails after 14.2s — an actual technical break</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 02: Crawlability, UX & Brand Guidelines -->
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>TECHNICAL AUDIT (ISSUES 7–11)</span>
+                  <span>CRAWLING, MOBILE & DESIGN</span>
+                </div>
+                <div class="card-content-area" style="padding: 22px 20px; gap: 12px;">
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>reCAPTCHA script blocking crawlers:</strong> Confirmed on-page, preventing webcrawling</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Broken & repeated links:</strong> Duplicated hyperlinks in the footer</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Overflowing content on mobile:</strong> Causes broken horizontal scroll on phones</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>Inconsistent heading fonts:</strong> Font choice doesn't match any core brand system</span>
+                  </div>
+                  <div class="bullet-item">
+                    <span class="bullet-icon" style="color: #D32F2F;">✕</span>
+                    <span><strong>No visible design system:</strong> Site built without brand identity guidelines</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>11-POINT TECHNICAL AUDIT</span>
+          </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             SLIDE 25 — WEBSITE REVAMP: BLUEPRINT & UI MOCKUP
+             ========================================================================== -->
+        <section class="slide" data-slide="25">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 07</span>
+                <span>REVAMP BLUEPRINT</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Website Revamp: What We Can Do</h2>
+              <p class="slide-subhead">A clean, fast website built to convert visitors into phone calls and form submissions.</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 25/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-visual-split">
+              
+              <!-- Left: Visual UI Mockup -->
+              <div class="strategy-card">
+                <div class="card-label-bar visual">
+                  <span>UI REDESIGN MOCKUP</span>
+                  <span>PREVIEW</span>
+                </div>
+                <div class="visual-media-box" onclick="openImage('assets/website_revamp_mockup.jpg', 'Liranz 16-Column Enterprise Website & Mobile Revamp UI')">
+                  <img src="assets/website_revamp_mockup.jpg" alt="Liranz Website Revamp Mockup">
+                  <div class="visual-overlay-tag">
+                    <span>LIRANZ DESKTOP & MOBILE UI</span>
+                    <span style="color: var(--ikb);">⤢ ENLARGE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: What We Can Do & What It Gets Us -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;">
+                
+                <div class="strategy-card">
+                  <div class="card-label-bar suggested">
+                    <span>02 // What We Can Do</span>
+                    <span>ACTION</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                      Full Website Revamp:
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box accent-ikb">
+                        <span class="swiss-item-title">Remove Heavy Autoplay</span>
+                        <p class="swiss-item-desc">Replace heavy background videos with optimized stills to instantly drop 9MB.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <span class="swiss-item-title">Fix Broken Scripts & SEO</span>
+                        <p class="swiss-item-desc">Debug webworker.js and fix reCAPTCHA so Google can index our pages.</p>
+                      </div>
+                      <div class="swiss-item-box accent-ikb">
+                        <span class="swiss-item-title">Mobile & Brand Typography</span>
+                        <p class="swiss-item-desc">Fix mobile viewports and link fonts to our locked brand design system.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="strategy-card">
+                  <div class="card-label-bar outcome">
+                    <span>03 // Expected Outcome</span>
+                    <span>WHAT IT GETS US</span>
+                  </div>
+                  <div class="card-content-area">
+                    <h4 class="swiss-headline-lead" style="color: #FFFFFF; background: var(--ink); padding: 8px 12px; margin-bottom: 4px;">
+                      High-Converting Inbound Hub
+                    </h4>
+                    <div class="swiss-block-list">
+                      <div class="swiss-item-box dark-box">
+                        <span class="swiss-item-title" style="color: #FFFFFF;">Sub-2s Load Speed</span>
+                        <p class="swiss-item-desc" style="color: rgba(255,255,255,0.85);">Loads in seconds instead of nearly 20, keeping visitors on the page.</p>
+                      </div>
+                      <div class="swiss-item-box dark-box">
+                        <span class="swiss-item-title" style="color: #FFFFFF;">Flawless Mobile Experience</span>
+                        <p class="swiss-item-desc" style="color: rgba(255,255,255,0.85);">Makes it effortless for executives to submit inquiries and book demos on their phones.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>WEBSITE REVAMP BLUEPRINT</span>
+          </div>
+        </section>
+
+
+        
+
+
+        <!-- ==========================================================================
+             SLIDE 26 — WEBSITE REVAMP: WHAT DOES IT GET US? (EDITORIAL STATEMENT)
+             ========================================================================== -->
+        <section class="slide" data-slide="26" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 07</span>
+                <span>THE OUTCOME</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">What Does It Get Us?</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 26/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // WEBSITE REVAMP OUTCOME
+            </div>
+            <h2 class="editorial-quote" style="font-size: 52px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "A blazingly fast sub-2s website that turns corporate visitors into qualified enterprise sales inquiries 24 hours a day."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="nextSlide()" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>EXPLORE ACTION 08: MEDIA DATABASE</span>
+              <span style="font-size: 24px; line-height: 1;">→</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>WEBSITE REVAMP IMPACT STATEMENT</span>
+          </div>
+        </section>
+
+
+        
+
+
+                <!-- ==========================================================================
+             SLIDE 27 — MEDIA DATABASE: CENTRAL CONTENT CATALOGUE (PROPOSAL)
+             ========================================================================== -->
+        <section class="slide" data-slide="27">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">ACTION 08</span>
+                <span>PROPOSAL & MEDIA CATALOGUE</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Media Database & Content Catalogue</h2>
+              <p class="slide-subhead">"I also propose a media database catalogue that will be used for contents, if one doesn't exist."</p>
+            </div>
+            <div class="mono-meta">
+              <span>№ 27/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="strategy-duo">
+              
+              <!-- 01 // The Opportunity -->
+              <div class="strategy-card">
+                <div class="card-label-bar observed">
+                  <span>01 // The Opportunity</span>
+                  <span>CENTRAL ASSETS</span>
+                </div>
+                <div class="card-content-area" style="padding: 30px 28px; gap: 18px;">
+                  <h4 class="swiss-headline-lead">
+                    A shared repository of Liranz videos and photos showcasing our team and work.
+                  </h4>
+                  <div class="swiss-block-list">
+                    <div class="swiss-item-box">
+                      <span class="swiss-item-title">Asset Centralization</span>
+                      <p class="swiss-item-desc">Gathering our photography, video footage, and project captures into one easily accessible location.</p>
+                    </div>
+                    <div class="swiss-item-box">
+                      <span class="swiss-item-title">Authentic Representation</span>
+                      <p class="swiss-item-desc">Having high-quality team photos ready ensures our marketing always reflects our real people and culture.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 02 // The Proposal -->
+              <div class="strategy-card">
+                <div class="card-label-bar suggested">
+                  <span>02 // The Proposal</span>
+                  <span>CONTENT CATALOGUE</span>
+                </div>
+                <div class="card-content-area" style="padding: 30px 28px; gap: 16px;">
+                  <h4 class="swiss-headline-lead" style="color: var(--ikb);">
+                    Build an Organized Media Catalogue:
+                  </h4>
+                  <div class="swiss-block-list">
+                    <div class="swiss-item-box accent-ikb">
+                      <div class="swiss-item-header">
+                        <span class="swiss-badge-num-ikb">01</span>
+                        <span>Organized Cloud Vault</span>
+                      </div>
+                      <p class="swiss-item-desc">A structured cloud library organized by department, project milestones, and asset format.</p>
+                    </div>
+                    <div class="swiss-item-box accent-ikb">
+                      <div class="swiss-item-header">
+                        <span class="swiss-badge-num-ikb">02</span>
+                        <span>Seamless Campaign Production</span>
+                      </div>
+                      <p class="swiss-item-desc">Enables the marketing and creative team to produce consistent, on-brand materials rapidly.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Outcome Callout -->
+            <div style="margin-top: 18px; padding: 18px 24px; background: #FFF6EE; border: 2px solid var(--liranz-orange); border-left: 8px solid var(--liranz-orange); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="mono-meta" style="color: var(--liranz-orange); margin-bottom: 4px; display: block;">EXPECTED OUTCOME</span>
+                <span style="font-size: 19px; font-weight: 700; color: var(--ink);">
+                  "A rich, authentic media library that lets us produce world-class campaigns in hours."
+                </span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--ink); color: #FFFFFF; font-family: var(--font-mono); font-size: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; margin-left: 20px;" onclick="nextSlide()">
+                <span>SEE FINAL VISION →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>MEDIA DATABASE PROPOSAL</span>
+          </div>
+        </section>
+
+
+        
+
+
+        <!-- ==========================================================================
+             SLIDE 28 — STRATEGIC ANTHEM: SETTING THE NATIONAL STANDARD
+             ========================================================================== -->
+        <section class="slide" data-slide="28" style="background-color: var(--paper-pure); justify-content: space-between;">
+          <div class="slide-header">
+            <div>
+              <div class="mono-meta">
+                <img src="assets/liranz_logo.png" alt="Liranz" class="brand-header-logo">
+                <span class="badge-ikb">STRATEGIC ANTHEM</span>
+                <span>THE STRATEGIC ADVANTAGE</span>
+              </div>
+              <h2 class="slide-headline" style="margin-top: 8px;">Setting the Standard</h2>
+            </div>
+            <div class="mono-meta">
+              <span>№ 28/28</span>
+            </div>
+          </div>
+
+          <div class="slide-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1400px; margin: 0 auto;">
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--liranz-orange); margin-bottom: 24px;">
+              // SETTING THE NATIONAL STANDARD
+            </div>
+            <h2 class="editorial-quote" style="font-size: 52px; line-height: 1.25; color: var(--ink); margin-bottom: 44px; max-width: 1300px;">
+              "In the Ghanaian IT space, no one is telling a story like this yet. When we execute this well, we set the national standard for what a modern tech brand looks like."
+            </h2>
+            <div style="display: inline-flex; align-items: center; gap: 16px; padding: 18px 38px; background: var(--ikb); color: #FFFFFF; font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: 0.12em; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 10px 30px rgba(0, 47, 167, 0.25);" onclick="showSlide(1)" onmouseover="this.style.backgroundColor='#00227A'" onmouseout="this.style.backgroundColor='var(--ikb)'">
+              <span>RESTART DECK ↺</span>
+              <span style="font-size: 20px; line-height: 1;">⤾</span>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span>LIRANZ TO THE WORLD</span>
+            <span>END OF DECK · THANK YOU</span>
+          </div>
+        </section>
+
+
+        
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Top-Right Floating Control Dock with Auto-Hide -->
+  <div id="nav-bar">
+    <button class="nav-btn" onclick="prevSlide()" title="Previous Slide (Left Arrow)">← Prev</button>
+    <div class="nav-counter" id="slide-indicator">№ 01/28</div>
+    <button class="nav-btn" onclick="nextSlide()" title="Next Slide (Right Arrow)">Next →</button>
+    <span style="color: rgba(255,255,255,0.2);">|</span>
+    <button class="nav-btn" onclick="toggleDrawer()" title="Slide Index / Thumbnails">Index ☰</button>
+    <button class="nav-btn" onclick="toggleFullScreen()" title="Toggle Fullscreen (F)">⛶ Fullscreen</button>
+  </div>
+
+  <!-- Slide Index Drawer -->
+  <div id="drawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Slide Index (28 Slides)</span>
+      <button class="modal-close" onclick="toggleDrawer()">✕ Close</button>
+    </div>
+    <div class="drawer-list" id="drawer-items">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div id="image-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-image-title">Visual Specimen</span>
+        <button class="modal-close" onclick="closeImage()">✕ Close</button>
+      </div>
+      <div class="image-modal-body">
+        <img id="modal-image-src" src="" alt="Enlarged Specimen">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       PRESENTATION RUNTIME CONTROLLER — 28 IMMACULATELY DEMARCATED SLIDES
+       ========================================================================== */
+    const totalSlides = 28;
+    let currentSlide = 1;
+
+    const slideTitles = [
+      "Title Cover: Observations, Strategy & Outcomes",
+      "Vision References (Global Benchmark Proof)",
+      "Vision Takeaway: 'These aren\'t templates to copy...'",
+      "Reference Video Theater (Playable In-Slide)",
+      "What We Can Do (5 Strategic Recommendations Overview)",
+      "Action 01 // Docu-Ad Concept (3-Act Narrative)",
+      "Action 01 // Docu-Ad: Showcase & Distribution Channels",
+      "Action 01 // Docu-Ad: 'We become unmatched...'",
+      "Action 02 // Social Media Revamp (Diagnosis & 3-Step Plan)",
+      "Action 02 // Social Media: Channels & Growth Plan",
+      "Action 02 // Social Media: 'Building a verified fan base...'",
+      "Action 03 // Creative Flyer System (Brand Manual Specimen)",
+      "Action 03 // Flyer System: 'Unified brand recognition...'",
+      "Action 04 // Reels & OKR Framework (Measurement Table)",
+      "Action 04 // Reels: Format & Channel Allocation",
+      "Action 04 // Reels: 'No more posting just for posting...'",
+      "Action 05 // Billboard Campaigns (Accra OOH Strategy)",
+      "Action 05 // Billboard Placement: Exploring Locations",
+      "Action 05 // Billboards: 'Showcase Liranz to the world...'",
+      "Action 06 // Education & Community (Diagnosis & Roadmap)",
+      "Action 06 // Education & Community: Deployment Channels",
+      "Action 06 // Education & Community: 'Foundational IT solidarity...'",
+      "Action 07 // Website Audit: Speed Diagnostic & Callout",
+      "Action 07 // Website Audit: 11 Specific Issues",
+      "Action 07 // Website Revamp Blueprint (UI Mockup)",
+      "Action 07 // Website Revamp: 'Sub-2s conversion engine...'",
+      "Action 08 // Media Database Proposal: 'Catalogue used for contents...'",
+      "Strategic Anthem: 'Setting the National Standard'"
+    ];
+
+    // Responsive Canvas Resizing for perfect 16:9 scale with zero clipping
+    function updateStageScale() {
+      const stage = document.getElementById('stage');
+      const stageW = 1920;
+      const stageH = 1080;
+      const windowW = window.innerWidth;
+      const windowH = window.innerHeight;
+
+      // Generous breathing room on viewport borders
+      const scale = Math.min((windowW * 0.98) / stageW, (windowH * 0.98) / stageH);
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', updateStageScale);
+    window.addEventListener('load', () => {
+      updateStageScale();
+      buildDrawer();
+      checkHash();
+    });
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach(slide => {
+        slide.classList.remove('active');
+        if (parseInt(slide.getAttribute('data-slide')) === currentSlide) {
+          slide.classList.add('active');
+        }
+      });
+
+      // Update indicator
+      const pad = currentSlide < 10 ? '0' + currentSlide : currentSlide;
+      const totalPad = totalSlides < 10 ? '0' + totalSlides : totalSlides;
+      document.getElementById('slide-indicator').textContent = `№ ${pad}/${totalPad}`;
+
+      // Update progress bar
+      const progressEl = document.getElementById('slide-progress-bar');
+      if (progressEl) {
+        progressEl.style.width = ((currentSlide / totalSlides) * 100) + '%';
+      }
+
+      // Update URL hash
+      window.location.hash = `slide-${currentSlide}`;
+
+      // Update drawer active item
+      document.querySelectorAll('.drawer-item').forEach(item => {
+        item.classList.remove('active');
+        if (parseInt(item.getAttribute('data-target')) === currentSlide) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // In-Slide Video Controller for Slide 4
+    function playInSlideVideo(videoId, title, takeaway, directUrl, element) {
+      const iframe = document.getElementById('inslide-player');
+      const titleEl = document.getElementById('inslide-video-title');
+      const takeawayEl = document.getElementById('inslide-takeaway');
+      const directLink = document.getElementById('inslide-direct-link');
+      
+      iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+      titleEl.textContent = `NOW PLAYING: ${title}`;
+      takeawayEl.textContent = takeaway;
+      if (directLink) directLink.href = directUrl || `https://www.youtube.com/watch?v=${videoId}`;
+
+      document.querySelectorAll('.video-nav-card').forEach(card => {
+        card.classList.remove('active');
+        const badge = card.querySelector('.badge');
+        if (badge) badge.textContent = 'SELECT';
+      });
+
+      if (element) {
+        element.classList.add('active');
+        const badge = element.querySelector('.badge');
+        if (badge) badge.textContent = 'PLAYING';
+      }
+    }
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (document.getElementById('image-modal').classList.contains('active')) {
+        if (e.key === 'Escape') closeImage();
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        showSlide(1);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'Escape') {
+        document.getElementById('drawer').classList.remove('open');
+      }
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    function checkHash() {
+      const match = window.location.hash.match(/slide-(\d+)/);
+      if (match && match[1]) {
+        const slideNo = parseInt(match[1]);
+        if (slideNo >= 1 && slideNo <= totalSlides) {
+          showSlide(slideNo);
+          return;
+        }
+      }
+      showSlide(1);
+    }
+
+    // Slide Index Drawer Builder
+    function buildDrawer() {
+      const list = document.getElementById('drawer-items');
+      list.innerHTML = '';
+      slideTitles.forEach((title, idx) => {
+        const slideNo = idx + 1;
+        const pad = slideNo < 10 ? '0' + slideNo : slideNo;
+        const item = document.createElement('div');
+        item.className = `drawer-item ${slideNo === currentSlide ? 'active' : ''}`;
+        item.setAttribute('data-target', slideNo);
+        item.innerHTML = `
+          <div class="drawer-num">${pad}</div>
+          <div class="drawer-label">${title}</div>
+        `;
+        item.onclick = () => {
+          showSlide(slideNo);
+          toggleDrawer();
+        };
+        list.appendChild(item);
+      });
+    }
+
+    function toggleDrawer() {
+      const drawer = document.getElementById('drawer');
+      drawer.classList.toggle('open');
+    }
+
+    // Image Lightbox Controller
+    function openImage(imageSrc, title) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-image-src');
+      const titleEl = document.getElementById('modal-image-title');
+      titleEl.textContent = title || 'Visual Specimen';
+      img.src = imageSrc;
+      modal.classList.add('active');
+    }
+
+    function closeImage() {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-image-src');
+      img.src = '';
+      modal.classList.remove('active');
+    }
+
+    // Auto-Hide Navigation Dock & Pointer on Inactivity (shows on mouse move)
+    let navTimer = null;
+    let isHoveringNav = false;
+
+    const navBar = document.getElementById('nav-bar');
+    navBar.addEventListener('mouseenter', () => { isHoveringNav = true; });
+    navBar.addEventListener('mouseleave', () => { isHoveringNav = false; });
+
+    function wakeNavAndPointer() {
+      navBar.classList.remove('hidden');
+      document.body.classList.remove('idle-cursor');
+      clearTimeout(navTimer);
+
+      navTimer = setTimeout(() => {
+        const isDrawerOpen = document.getElementById('drawer').classList.contains('open');
+        const isModalOpen = document.getElementById('image-modal').classList.contains('active');
+
+        if (!isDrawerOpen && !isModalOpen && !isHoveringNav) {
+          navBar.classList.add('hidden');
+          if (document.fullscreenElement) {
+            document.body.classList.add('idle-cursor');
+          }
+        }
+      }, 2500);
+    }
+
+    window.addEventListener('mousemove', wakeNavAndPointer);
+    window.addEventListener('touchstart', wakeNavAndPointer);
+    window.addEventListener('keydown', wakeNavAndPointer);
+
+    // Initial wake
+    wakeNavAndPointer();
+  </script>
+</body>
+</html>
